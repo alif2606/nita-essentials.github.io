@@ -211,7 +211,7 @@ nav {
   font-size: 0.8125rem;
 }
 
-/* code for the discord and start contri buttonn in the academics tab */
+/* code for the discord and start contri button in the academics tab */
 .button-group{
     display:flex;
     justify-content:center;
@@ -234,6 +234,18 @@ nav {
     height:20px;
     object-fit:contain;
 }
+
+/* for youtube button */
+.yt-btn {
+  border-color: rgb(255, 0, 0); 
+  color: red; margin-right: 2rem;
+}
+
+.yt-btn:hover {
+  background: #dc4a4a;
+  color: #ffffff;
+}
+
 /* ===== CARDS ===== */
 .card-grid {
   display: grid;
