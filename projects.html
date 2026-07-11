@@ -36,10 +36,9 @@
       <li><a href="academics.html">Academics</a></li>
       <li><a href="essentials.html">Essentials</a></li>
       <li><a href="sports.html">Sports</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>      
       <li><a href="tips.html">Tips</a></li>
-      <li><a href="projects.html" class="active">Projects</a></li>
       <li><a href="contribute.html">Contribute</a></li>
-      <li><a href="about.html">About</a></li>
     </ul>
   </div>
 </nav>
@@ -53,15 +52,6 @@
 
 <section class="section">
   <div class="container">
-
-    <div class="notice notice-mb">
-      <span>💡</span>
-      <div>
-        Built something useful? A web app, tool, research project, or open-source contribution? 
-        <a href="contribute.html" class="notice-link">Submit your project</a> 
-        and help inspire fellow students.
-      </div>
-    </div>
 
     <!-- Filter Buttons -->
     <div class="filter-bar filter-mb">
@@ -109,14 +99,14 @@
       </div>
 
       <!-- Placeholder for more projects -->
-      <div class="project-item project-full" data-cat="Tool">
+      <div class="project-item project-full" data-cat="Tool,Research,Open Source">
         <div class="project-placeholder">
           <div class="project-placeholder-icon">🚧</div>
           <h3 class="project-placeholder-title">More Projects Coming Soon</h3>
           <p class="project-placeholder-text">
             Built a web app, automation tool, research implementation, or campus utility? We want to feature it here.
           </p>
-          <a href="contribute.html" class="btn btn-primary btn-sm">Submit Your Project →</a>
+          <a href="contribute.html#contributions" class="btn btn-primary btn-sm">Submit Your Project →</a>
         </div>
       </div>
 
@@ -127,7 +117,7 @@
       <span>💻</span>
       <div>
         Have a side project, coursework implementation, or open-source contribution? 
-        <a href="https://forms.gle/yourformlink" class="notice-link">Submit it via this form</a> 
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdO_3fpScFzIBaKlsXUSYHU2pd4UCEIIFFw8a9D_o3gfkbqiw/viewform?usp=header" class="notice-link">Submit it via this form</a> 
         or open a Pull Request on GitHub. Every project goes through a quick review before being featured.
       </div>
     </div>
@@ -149,15 +139,32 @@
 
   // For category filtering
   document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = btn.dataset.cat;
-      document.querySelectorAll('.project-item').forEach(card => {
-        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
-      });
+  btn.addEventListener('click', () => {
+
+    document.querySelectorAll('.filter-btn').forEach(b =>
+      b.classList.remove('active')
+    );
+
+    btn.classList.add('active');
+
+    const cat = btn.dataset.cat;
+
+    document.querySelectorAll('.project-item').forEach(card => {
+
+      const categories = card.dataset.cat
+        .split(",")
+        .map(item => item.trim());
+
+      if (cat === "all" || categories.includes(cat)) {
+        card.style.display = "";
+      } else {
+        card.style.display = "none";
+      }
+
     });
+
   });
+});
 
   // For loading footer.html
   fetch('./footer.html')
