@@ -50,13 +50,13 @@
   </div>
 </div>
 
-<section class="section section-alt">
+<section class="section section-alt" style="padding-top:1.5rem;">
   <div class="container" style="max-width:760px;">
 
-    <h2 class="section-title">Ways to contribute</h2>
+    <h2 class="section-title" id="ways-to-contribute">Ways to contribute</h2>
     <p class="section-sub">You don't need to be a developer to help. Every type of contribution is welcome.</p>
 
-     <div class="notice" style="margin-bottom:1.75rem;">
+     <div class="notice" style="margin-bottom:1.75rem;" id="contributions">
       <span>💬</span>
       <div>Not familiar with GitHub? No problem - use the forms below. It takes under two minutes and a maintainer will review and add your submission to the site.</div>
     </div>
@@ -79,17 +79,17 @@
         <h3>Share a tip</h3>
         <p>Something you wish someone had told you before joining? A mistake you made that others could avoid? Write it up and submit it.</p>
         <a href="https://forms.gle/qc7ztMnnkczv67aM7" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Share a Tip →</a>
-
       </div>
       <div class="card">
-        <div class="card-icon">✏️</div>
-        <h3>Fix or improve existing content</h3>
-        <p>Found something outdated, incorrect, or that could be described better? Corrections and improvements are always welcome.</p>
+        <div class="card-icon">🚀</div>
+        <h3>Submit a project</h3>
+        <p>Built a web app, tool, automation script, or research implementation? Showcase your work and inspire fellow students.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdO_3fpScFzIBaKlsXUSYHU2pd4UCEIIFFw8a9D_o3gfkbqiw/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Submit a Project →</a>
       </div>
     </div>
 
     <!-- HOW TO CONTRIBUTE -->
-    <h2 class="section-title" style="margin-bottom:1.5rem;">How to contribute for fixing or Improving the existing Content</h2>
+    <h2 id="how-to-contribute" class="section-title" style="margin-bottom:1.5rem;">How to contribute for fixing or Improving the existing Content</h2>
 
     <div class="steps-list" style="margin-bottom:3rem;">
       <div class="step-item">
@@ -139,8 +139,8 @@
     <!-- REVIEW POLICY -->
     <div id="policy" style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.75rem; margin-bottom:2rem;">
       <h2 class="section-title" style="font-size:1.25rem; margin-bottom:0.75rem;">Review Policy</h2>
-      <p style="color:var(--text-light); font-size:0.9375rem; line-height:1.75; margin-bottom:0.75rem;">Every contribution is manually reviewed before acceptance. This ensures the information students receive is accurate and genuinely useful  not promotional, outdated, or misleading.</p>
-      <p style="color:var(--text-light); font-size:0.9375rem; line-height:1.75; margin-bottom:0.75rem;">A contribution may be modified, sent back for revision, or rejected if it contains inaccurate or unverifiable claims, promotional language designed to push a specific product, information that could mislead a student into an unnecessary or costly purchase, or content that's already well-covered in the existing site.</p>
+      <p style="color:var(--text-light); font-size:0.9375rem; line-height:1.75; margin-bottom:0.75rem;">Every contribution is <strong>manually reviewed</strong> before acceptance. This ensures the information students receive is accurate and genuinely useful and not promotional, outdated, or misleading.</p>
+      <p style="color:var(--text-light); font-size:0.9375rem; line-height:1.75; margin-bottom:0.75rem;">A <strong>contribution may be modified, sent back for revision, or rejected if it contains inaccurate or unverifiable claims</strong>, promotional language designed to push a specific product, information that could mislead a student into an unnecessary or costly purchase, or content that's already well-covered in the existing site.</p>
       <p style="color:var(--text-light); font-size:0.9375rem; line-height:1.75;">Accepted contributions may be lightly edited for clarity and consistency before being published.</p>
     </div>
 
@@ -156,41 +156,19 @@
   </div>
 </section>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <h3>NITA<span>Essentials</span></h3>
-      <p>A student-driven resource hub for NIT Agartala.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="academics.html">Academics</a></li>
-        <li><a href="essentials.html">Essentials</a></li>
-        <li><a href="sports.html">Sports</a></li>
-        <li><a href="tips.html">Tips</a></li>
-        <li><a href="contribute.html">Contribute</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contribute</h4>
-      <ul>
-        <li><a href="https://github.com/nita-essentials/nita-essentials.github.io" target="_blank">GitHub Repository </a></li>
-        <li><a href="#policy">Review Policy</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 NITA Essentials  Built by students, for students ❤️</span>
-    <span style="font-size:0.75rem; opacity:0.7;">Some links are affiliate links.</span>
-  </div>
-</footer>
+<div id="footer"></div>
 
 <script>
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
   hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    //  For loading footer.html
+  fetch('./footer.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('footer').innerHTML = data;
+  });
 </script>
 
 <script src="notices.js"></script>
