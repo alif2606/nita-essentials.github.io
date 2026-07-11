@@ -945,3 +945,167 @@ footer {
     justify-content: center;
   }
 }
+
+
+/* ===== PROJECTS PAGE ===== */
+
+/* Notice spacing utilities */
+.notice-mb {
+  margin-bottom: 2.5rem;
+}
+
+.notice-mt {
+  margin-top: 3rem;
+}
+
+.notice-link {
+  color: inherit;
+  font-weight: 600;
+}
+
+/* Filter bar spacing */
+.filter-mb {
+  margin-bottom: 2.5rem;
+}
+
+/* Project item layout */
+.project-full {
+  grid-column: 1 / -1;
+}
+
+/* Project card container */
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  border-left: 4px solid var(--teal);
+}
+
+/* Project header section */
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Project category wrapper */
+.project-category-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Project category label */
+.project-category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--teal-dark);
+}
+
+/* Project title */
+.project-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+/* Project description */
+.project-description {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Project actions (buttons) */
+.project-actions {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+
+/* Project author section */
+.project-author {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.project-author-text {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.project-author-link {
+  color: var(--teal-dark);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.project-author-link:hover {
+  text-decoration: underline;
+}
+
+/* Project placeholder (coming soon) */
+.project-placeholder {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.project-placeholder-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+
+.project-placeholder-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.project-placeholder-text {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive adjustments for projects page */
+@media (max-width: 768px) {
+  .project-card {
+    padding: 1.5rem;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+  }
+
+  .project-header {
+    flex-direction: column;
+  }
+
+  .project-actions {
+    width: 100%;
+  }
+
+  .project-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
