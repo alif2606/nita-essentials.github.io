@@ -6,7 +6,7 @@
   <title>College Tips  National Institute of Technology Agartala Essentials</title>
   <meta name="description" content="Practical college tips for NIT Agartala students  what to do, what to avoid, productivity, hostel life, and placement advice." />
   <!-- ICON For NITA-Essential -->
-   <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./icon/favicon-16x16.png">
     <link rel="manifest" href="./icon/site.webmanifest">
@@ -21,7 +21,7 @@
 
       gtag('config', 'G-L8GYV0HE63');
     </script>
- 
+
 </head>
 <body>
 
@@ -189,22 +189,22 @@
         <p>Before purchasing items like aprons, drafters, or other study essentials, take a look at the Buy & Sell NITA group. Many students sell useful items in good condition, and you might find exactly what you need for much less than the original price.
         </p>
         <br>
-       <a href="https://chat.whatsapp.com/LuRMQeU4DCkG6D3vsZ7lH4?s=cl&p=a&mlu=3&ilr=0"
+      <a href="https://chat.whatsapp.com/LuRMQeU4DCkG6D3vsZ7lH4?s=cl&p=a&mlu=3&ilr=0"
         target="_blank" class="btn btn-outline btn-sm whatsapp-btn">
         <img src="https://static.whatsapp.net/rsrc.php/yd/r/PfkSLByWV8O.webp" alt="WhatsApp"
         class="whatsapp-icon">
-       <span>Join Buy & Sell NITA →</span>
-       </a>
+      <span>Join Buy & Sell NITA →</span>
+      </a>
     </div> 
 
-     <div class="tip-card" data-cat="Academics">
+    <div class="tip-card" data-cat="Academics">
         <div class="tip-category">Academics</div>
         <p>⚠️ Don't neglect PYQs.<br>
         They are mandatory and must be solved before appearing for the exam.
         For 1st year: Refer to the Sombaba PDF, compiled by senior Somesh Bhaiya.</p>
       </div>
 
-     <div class="tip-card" data-cat="Academics">
+    <div class="tip-card" data-cat="Academics">
         <div class="tip-category">Academics</div>
         <p>⏱️ Buy a Watch for Exams.<br>
       Invigilators will tell you the remaining time, but it's strongly suggested to buy your own watch. Smartwatches are not allowed inside the exam hall.<br>
@@ -218,7 +218,6 @@
   <p>✈️ Book Flights Early</p>
   <p>Book as early as possible if travelling by flight.</p>
   <p>Prices tend to rise closer to the date.</p>
- 
 </div>
 
 
@@ -265,41 +264,73 @@
 <!-- Below is the New Footer -->
 <div id="footer"></div>
 
-
 <script>
-  // For Hamburger Menu
+  // ===== Mobile Navigation =====
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
-  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
 
-  document.querySelectorAll('.accordion-header').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const body = btn.nextElementSibling;
-      const isOpen = body.classList.contains('open');
-      document.querySelectorAll('.accordion-body.open').forEach(b => b.classList.remove('open'));
-      document.querySelectorAll('.accordion-header.open').forEach(b => b.classList.remove('open'));
-      if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
     });
-  });
-  
-  // For different tips category buttons
+  }
+
+  // ===== Auto-hide Navbar =====
+  const navbar = document.querySelector('nav');
+
+  if (navbar) {
+    let lastScrollY = window.scrollY;
+    const SCROLL_THRESHOLD = 10;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      // Always show navbar at the top
+      if (currentScrollY <= 0) {
+        navbar.classList.remove('nav-hidden');
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      // Ignore tiny scroll movements
+      if (Math.abs(currentScrollY - lastScrollY) < SCROLL_THRESHOLD) {
+        return;
+      }
+
+      if (currentScrollY > lastScrollY) {
+        navbar.classList.add('nav-hidden');
+      } else {
+        navbar.classList.remove('nav-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+  }
+
+  // ===== Tips Filter =====
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+
       btn.classList.add('active');
+
       const cat = btn.dataset.cat;
+
       document.querySelectorAll('.tip-card').forEach(card => {
-        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+        card.style.display =
+          (cat === 'all' || card.dataset.cat === cat)
+            ? ''
+            : 'none';
       });
     });
   });
 
-  //  For loading footer.html
+  // ===== Load Footer =====
   fetch('./footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer').innerHTML = data;
-  });
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
 </script>
 
 <script src="notices.js"></script>

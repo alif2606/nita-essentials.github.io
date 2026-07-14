@@ -6,7 +6,7 @@
   <title>Contribute  National Institute of Technology Agartala Essentials</title>
   <meta name="description" content="Help future NIT Agartala students by contributing resources, tips, and product recommendations to NITA Essentials." />
   <!-- ICON For NITA-Essential -->
-   <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./icon/favicon-16x16.png">
     <link rel="manifest" href="./icon/site.webmanifest">
@@ -21,7 +21,7 @@
 
       gtag('config', 'G-L8GYV0HE63');
     </script>
- 
+
 </head>
 <body>
 
@@ -159,18 +159,57 @@
 <div id="footer"></div>
 
 <script>
+  // ===== Mobile navigation =====
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
-  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
 
-    //  For loading footer.html
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+  }
+
+  // ===== Auto-hide navbar on scroll =====
+  const navbar = document.querySelector('nav');
+
+  if (navbar) {
+    let lastScrollY = window.scrollY;
+    const SCROLL_THRESHOLD = 10;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      // Always show navbar at the top
+      if (currentScrollY <= 0) {
+        navbar.classList.remove('nav-hidden');
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      // Ignore tiny scroll movements
+      if (Math.abs(currentScrollY - lastScrollY) < SCROLL_THRESHOLD) {
+        return;
+      }
+
+      if (currentScrollY > lastScrollY) {
+        // Scrolling down
+        navbar.classList.add('nav-hidden');
+      } else {
+        // Scrolling up
+        navbar.classList.remove('nav-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+  }
+
+  // ===== Load footer =====
   fetch('./footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer').innerHTML = data;
-  });
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
 </script>
-
 <script src="notices.js"></script>
 </body>
 </html>

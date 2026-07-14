@@ -7,7 +7,7 @@
   <meta name="description" content="Why NITA Essentials was created, who it's for, and the story behind it." />
   <link rel="stylesheet" href="./css/styles.css" />
   <!-- ICON For NITA-Essential -->
-   <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./icon/favicon-16x16.png">
     <link rel="manifest" href="./icon/site.webmanifest">
@@ -21,7 +21,7 @@
 
       gtag('config', 'G-L8GYV0HE63');
     </script>
- 
+
 </head>
 <body>
 
@@ -116,7 +116,12 @@
 <script>
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
-  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+  }
 </script>
 
 <script src="notices.js"></script>
