@@ -51,7 +51,7 @@
 </div>
 
 <section class="section">
-  <div class="container">
+  <div class="container" id="all-projects">
 
     <!-- Filter Buttons -->
     <div class="filter-bar filter-mb">
@@ -132,48 +132,85 @@
 <div id="footer"></div>
 
 <script>
-  // For Hamburger Menu
+  // ===== Mobile Navigation =====
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
-  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
 
-  // For category filtering
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+  }
 
-    document.querySelectorAll('.filter-btn').forEach(b =>
-      b.classList.remove('active')
-    );
+  // ===== Auto-hide Navbar =====
+  const navbar = document.querySelector('nav');
 
-    btn.classList.add('active');
+  if (navbar) {
+    let lastScrollY = window.scrollY;
+    const SCROLL_THRESHOLD = 10;
 
-    const cat = btn.dataset.cat;
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
 
-    document.querySelectorAll('.project-item').forEach(card => {
-
-      const categories = card.dataset.cat
-        .split(",")
-        .map(item => item.trim());
-
-      if (cat === "all" || categories.includes(cat)) {
-        card.style.display = "";
-      } else {
-        card.style.display = "none";
+      // Always show navbar at the top
+      if (currentScrollY <= 0) {
+        navbar.classList.remove('nav-hidden');
+        lastScrollY = currentScrollY;
+        return;
       }
 
+      // Ignore tiny scroll movements
+      if (Math.abs(currentScrollY - lastScrollY) < SCROLL_THRESHOLD) {
+        return;
+      }
+
+      if (currentScrollY > lastScrollY) {
+        navbar.classList.add('nav-hidden');
+      } else {
+        navbar.classList.remove('nav-hidden');
+      }
+
+      lastScrollY = currentScrollY;
     });
+  }
 
+  // ===== Project Category Filter =====
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+
+      document.querySelectorAll('.filter-btn').forEach(b =>
+        b.classList.remove('active')
+      );
+
+      btn.classList.add('active');
+
+      const cat = btn.dataset.cat;
+
+      document.querySelectorAll('.project-item').forEach(card => {
+
+        const categories = card.dataset.cat
+          .split(",")
+          .map(item => item.trim());
+
+        if (cat === "all" || categories.includes(cat)) {
+          card.style.display = "";
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+    });
   });
-});
 
-  // For loading footer.html
+  // ===== Load Footer =====
   fetch('./footer.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('footer').innerHTML = data;
     });
 
-  // Back To Top Button
+  // ===== Back To Top Button =====
   const backToTopBtn = document.getElementById("backToTopBtn");
   const footer = document.getElementById("footer");
 
@@ -199,7 +236,6 @@
     });
   });
 </script>
-
 <script src="notices.js"></script>
 </body>
 </html>
