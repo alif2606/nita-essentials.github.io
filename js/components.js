@@ -12,13 +12,35 @@
  * ─────────────────────────────────────────────────────────────────
  */
 
+
+
+// For Files in the Resources Folder
+let navPath, footerPath;
+if (window.location.pathname.includes('/resources/')) {
+    navPath = '../nav.html';
+    footerPath = '../footer.html';
+} else {
+    navPath = './nav.html';
+    footerPath = './footer.html';
+}
+
+
 // ── Load Nav ────────────────────────────────────────────────────
-fetch('./nav.html')
+fetch(navPath)
 .then(r => r.text())
 .then(html => {
+
         //For loading the nav
         const navContainer = document.getElementById('nav');
         navContainer.innerHTML = html;
+
+        // For loading of the pages in resource folder
+        if (window.location.pathname.includes('/resources/')) {
+            document.querySelectorAll('#nav a').forEach(link => {
+                const href = link.getAttribute('href');
+                link.setAttribute('href', '../' + href);
+            });
+        }
 
         // ── Hamburger toggle ──
         const hamburger = document.getElementById('hamburger');
@@ -37,10 +59,12 @@ fetch('./nav.html')
         });
         }
 
+
 //  ───── Themes ────────────────────────────────────────────────
 
 const toggle = document.getElementById('theme-toggle');
 const root = document.documentElement;
+
 
 // Apply saved theme on load
 const saved = localStorage.getItem('theme') || 'light';
@@ -55,19 +79,23 @@ toggle.addEventListener('click', () => {
   toggle.textContent = next === 'dark' ? '☀️' : '🌙';
 });
 
+
 // Below is to check the users default theme
 if (!localStorage.getItem('theme')) {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
 }
 
-// ── Active link highlight ──
+
+// ──────────────── Active link highlight ────────────────────────────────────
 // Matches current filename (e.g. "sports.html") to nav hrefs
         const currentPage = location.pathname.split('/').pop() || 'index.html';
         document.querySelectorAll('.nav-links a').forEach(a => {
-        if (a.getAttribute('href') === currentPage) {
-            a.classList.add('active');
-        }
+            const href = a.getAttribute('href') || '';
+            const hrefPage = href.split('/').pop();
+            if (hrefPage === currentPage) {
+                a.classList.add('active');
+            }
         });
 
 
@@ -120,8 +148,9 @@ if (!localStorage.getItem('theme')) {
 })
 .catch(err => console.error('components.js: failed to load nav.html', err));
 
-// ── Load Footer ─────────────────────────────────────────────────
-fetch('./footer.html')
+
+// ──────── Load Footer ─────────────────────────────────────────────────
+fetch(footerPath)
   .then(r => r.text())
   .then(html => {
     const footerContainer = document.getElementById('footer');
