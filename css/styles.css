@@ -1000,6 +1000,16 @@ footer {
   .product-grid, .card-grid, .tips-grid {
     grid-template-columns: 1fr;
   } 
+  .product-grid--two-col {
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  }
+  .product-grid--two-col .product-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  }
 }
 
 
