@@ -91,6 +91,7 @@ body {
   display: flex;
   gap: 0.25rem;
   list-style: none;
+  z-index: 200;
 }
 
 .nav-links a {
@@ -227,6 +228,34 @@ body {
 
 .btn-outline:hover {
   background: var(--teal-light);
+}
+
+.hoopers-details {
+  width: min(100%, 320px);
+  min-height: 48px;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.92), rgba(2, 132, 199, 0.78));
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.hoopers-details:hover {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.98), rgba(14, 165, 233, 0.9));
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(2, 132, 199, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.hoopers-details:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
 }
 
 .btn-ghost {
@@ -909,6 +938,7 @@ footer {
     padding: 1rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     gap: 0.25rem;
+    z-index: 200;
   }
 
   .nav-links.open { display: flex; }
@@ -990,7 +1020,12 @@ footer {
     font-size:12px;
     padding:8px;
 }
-
+/* 
+Removes read more button for desktop devices
+*/
+.read-more-btn {
+  display: none;
+}
 }
 
 @media (max-width: 480px) {
@@ -1010,6 +1045,26 @@ footer {
   -webkit-box-orient: vertical;
   overflow: hidden;
   }
+
+  /* Read More Button for the Products */
+  .read-more-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--teal);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  display: block;
+}
+
+.read-more-btn:hover {
+  color: var(--teal-dark);
+  text-decoration: underline;
+}
 }
 
 
@@ -1180,4 +1235,106 @@ footer {
 /* ===== SPORTS PAGE ===== */
 .sport-section {
   margin-bottom: 2rem;
+}
+
+
+/* ================TESTING GROUND================= */
+/* Remove read more for desktop and other devices except mobile */
+
+
+/* Styles for Pop up display of Products */
+#product-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 9998;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem;
+  backdrop-filter: blur(3px);
+  animation: overlayIn 0.2s ease;
+}
+
+#product-modal-overlay.hidden {
+  display: none !important;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#product-modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 360px;
+  width: 100%;
+  position: relative;
+  animation: boxIn 0.25s ease;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+@keyframes boxIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: var(--border);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+#modal-close:hover {
+  background: var(--teal);
+  color: white;
+}
+
+#modal-img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: var(--off-white);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+}
+
+#modal-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.625rem;
+  letter-spacing: -0.01em;
+}
+
+#modal-desc {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  white-space: pre-line;
+}
+
+#modal-link {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.9375rem;
 }

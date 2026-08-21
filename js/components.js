@@ -159,3 +159,59 @@ fetch(footerPath)
   })
   .catch(err => console.error('components.js: failed to load footer.html', err));
 
+
+
+//----------------TESING GROUND -------------------
+
+(function () {
+  const overlay = document.getElementById('product-modal-overlay');
+  const modalImg  = document.getElementById('modal-img');
+  const modalName = document.getElementById('modal-name');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalLink = document.getElementById('modal-link');
+  const closeBtn  = document.getElementById('modal-close');
+
+  // Hide on load
+  overlay.classList.add('hidden');
+
+  function openModal(card) {
+    // Read image from the card's <img>
+    const img  = card.querySelector('.product-img');
+    const body = card.querySelector('.product-body');
+    const link = card.querySelector('.btn-primary');
+
+    modalImg.src        = img ? img.src : '';
+    modalImg.alt        = img ? img.alt : '';
+    modalName.textContent = body.dataset.name || card.querySelector('.product-name')?.textContent || '';
+    modalDesc.textContent = (body.dataset.fullDesc || '').replace(/\\n/g, '\n');
+    modalLink.href      = link ? link.href : '#';
+
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Attach to all read-more buttons
+  document.querySelectorAll('.read-more-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      openModal(btn.closest('.product-card'));
+    });
+  });
+
+  // Close on X button
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close on backdrop click
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+})();
